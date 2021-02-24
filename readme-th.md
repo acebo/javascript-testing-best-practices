@@ -26,7 +26,7 @@ Start by understanding the ubiquitous testing practices that are the foundation 
 
 ### Written By Yoni Goldberg
 เขียนโดย โยนิ โกลด์เบิร์ก
-- A JavaScript & Node.js consultant ผู้เชี่ยวชาญและที่ปรึกษา JavaScript และ Node.js
+- A JavaScript & Node.js consultant ผู้เชี่ยวชาญ JavaScript และ Node.js
 - 📗 [Testing Node.js & JavaScript From A To Z](https://www.testjavascript.com) - My comprehensive online course with more than [10 hours of video](https://www.testjavascript.com), 14 test types and more than 40 best practices
 - [Follow me on Twitter ](https://twitter.com/goldbergyoni/)
 
@@ -40,7 +40,7 @@ Start by understanding the ubiquitous testing practices that are the foundation 
 - 🇪🇸[Spanish](readme-es.md) - courtesy of [Miguel G. Sanguino](https://github.com/sanguino)
 - 🇹🇭[Thai](readme-th.md) - courtesy of [Holly Jira](https://github.com/acebo)
 - Want to translate to your own language? please open an issue 💜
-ต้องการแปลเป็นภาษาของคุณใช่ไหม? กรุณาเปิด issue  💜
+ต้องการแปลเป็นภาษาของคุณใช่ไหม? กรุณาเปิด issue ครับ  💜
 
 <br/><br/>
 
@@ -51,26 +51,30 @@ Start by understanding the ubiquitous testing practices that are the foundation 
 A single advice that inspires all the others (1 special bullet)
 คำแนะนำเพียงข้อเดียวที่จุดประกายข้ออื่นๆ (1 หัวข้อพิเศษ)
 
-#### [`Section 1: The Test Anatomy บทที่ 1: โครงสร้างของการทดสอบ`](#section-1-the-test-anatomy-1)
+#### [`Section 1: The Test Anatomy บทที่ 1: โครงสร้างการเขียน Test`](#section-1-the-test-anatomy-1)
 
 The foundation - structuring clean tests (12 bullets)
-หลักการพื้นฐาน - การจัดโครงสร้างการทดสอบที่สะอาด
+หลักการพื้นฐาน - จัดโครงสร้าง Clean Tests (12 หัวข้อ)
 
-#### [`Section 2: Backend`](#section-2️⃣-backend-testing)
+#### [`Section 2: Backend บทที่ 2: ส่วนหลังบ้าน`](#section-2️⃣-backend-testing)
 
 Writing backend and Microservices tests efficiently (8 bullets)
+การเขียน Test ส่วนหลังบ้านและ Microservices ให้่มีประสิทธิภาพ (8 หัวข้อ)
 
-#### [`Section 3: Frontend`](#section-3️⃣-frontend-testing)
+#### [`Section 3: Frontend บทที่ 3: ส่วนหน้าบ้าน`](#section-3️⃣-frontend-testing)
 
 Writing tests for web UI including component and E2E tests (11 bullets)
+การเขียน Test ส่วน UI บนหน้าเว็บ ทั้งส่วนการทดสอบ Component และ E2E (11 หัวข้อ)
 
-#### [`Section 4: Measuring Tests Effectiveness`](#section-4️⃣-measuring-test-effectiveness)
+#### [`Section 4: Measuring Tests Effectiveness บทที่ 4 การวัดผลการเขียนเทสต์ที่มีประสิทธิภาพ`](#section-4️⃣-measuring-test-effectiveness)
 
 Watching the watchman - measuring test quality (4 bullets)
+การวัดผลด้วย watchman - การวัดคุณภาพของเทสต์
 
-#### [`Section 5: Continuous Integration`](#section-5️⃣-ci-and-other-quality-measures)
+#### [`Section 5: Continuous Integration บทที่ 5: Continuous Integration`](#section-5️⃣-ci-and-other-quality-measures)
 
 Guidelines for CI in the JS world (9 bullets)
+คู่มือสำหรับ CI ในโลกของ JavaScript
 
 <br/><br/>
 
