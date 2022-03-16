@@ -141,8 +141,7 @@ describe('Products Service', function() {
 
 ## ⚪ ️ 1.2 จัดโครงสร้างของ test ด้วยรูปแบบ AAA
 
-:white_check_mark: **ควรทำ:** Structure your tests with 3 well-separated sections Arrange, Act & Assert (AAA). Following this structure guarantees that the reader spends no brain-CPU on understanding the test plan:
-จัดโครงสร้างของ test เป็น 3 ส่วน ได้่แก่ กำหนด (Arrange), กระทำ (Act) และ ยืนยัน (Assert) ซึ่งการแยกออกเป็นส่วนแบบนี้จะทำให้คนอ่านเข้าใจได้แทบจะทันที และเข้าใจถึงการทดสอบ
+:white_check_mark: **ควรทำ:** จัดโครงสร้างของ test เป็น 3 ส่วน ได้แก่ กำหนด (Arrange), กระทำ (Act) และ ยืนยัน (Assert) ซึ่งการแยกออกเป็นส่วนแบบนี้จะทำให้คนอ่านเข้าใจได้แทบจะทันที และเข้าใจถึงการทดสอบ
 
 A1- กำหนด (Arrange): กำหนดสิ่งที่จำเป็นต่างๆ ในการทดสอบโดยมีเป้าหมายเพื่อเป็นการจำลอง ซึ่งอาจจะรวมถึงการสร้างตัวการทดสอบใหม่, การเพิ่มข้อมูลดาต้าเบส, การจำลองสมมติรูปแบบข้อมูล และอื่นๆ ที่ใช้เป็นเงื่อนไขในการทดสอบ
 
@@ -197,20 +196,20 @@ test("Should be classified as premium", () => {
 
 <br/><br/>
 
-## ⚪ ️1.3 Describe expectations in a product language: use BDD-style assertions
+## ⚪ ️1.3 อธิบายผลลัพธ์ที่คาดหวังโดยใช้ภาษาแบบที่มนุษย์เข้าใจได้ง่าย: โดยใช้รูปแบบ BDD
 
-:white_check_mark: **Do:** Coding your tests in a declarative-style allows the reader to get the grab instantly without spending even a single brain-CPU cycle. When you write imperative code that is packed with conditional logic, the reader is forced to exert more brain-CPU cycles. In that case, code the expectation in a human-like language, declarative BDD style using `expect` or `should` and not using custom code. If Chai & Jest doesn't include the desired assertion and it’s highly repeatable, consider [extending Jest matcher (Jest)](https://jestjs.io/docs/en/expect#expectextendmatchers) or writing a [custom Chai plugin](https://www.chaijs.com/guide/plugins/)
+:white_check_mark: **ควรทำ:** การเขียน test ด้วยโค้ดในรูปแบบการประกาศนั้น จะสามารถทำให้ผู้อ่านเข้าใจได้ทันที แต่เมื่อคุณต้องเขียนโค้ดที่เงื่อนไขหรือลอจิกจำนวนมาก ผู้อ่านจะต้องพยายามเข้าใจอย่างมาก ในกรณีนี้ ควรจะต้องเขียนอธิบายผลลัพธ์ที่คาดหวังใน test ด้วยภาษาที่มนุษย์เข้าใจได้ง่าย อิงรูปแบบการประกาศ แบบ BDD โดยใช้ `expect` หรือ `should` โดยไม่ใช้โค้ดที่กำหนดเอง โดยหากถ้า Chai และ Jest ไม่ได้มีคำที่ต้องการที่ต้องการใช้ซ้ำมากๆ ให้พิจารณา [ขยายส่วน Jest matcher (Jest)](https://jestjs.io/docs/en/expect#expectextendmatchers) หรือเขียน [Chai plugin แบบกำหนดเอง](https://www.chaijs.com/guide/plugins/)
 <br/>
 
-❌ **Otherwise:** The team will write less tests and decorate the annoying ones with .skip()
+❌ **ถ้าไม่ทำล่ะ:** จะทำให้ทีมเขียน test น้อยลง และจะค่อยๆเริ่มการใช้ .skip() เพื่อข้ามการทดสอบที่เข้าใจยากออกไป
 
 <br/>
 
-<details><summary>✏ <b>Code Examples</b></summary><br/>
+<details><summary>✏ <b>ตัวอย่างโค้ด</b></summary><br/>
 
 ![](https://img.shields.io/badge/🔧%20Example%20using%20Mocha-blue.svg "Examples with Mocha & Chai") ![](https://img.shields.io/badge/🔧%20Example%20using%20Jest-blue.svg "Examples with Jest")
 
-### :thumbsdown: Anti-Pattern Example: The reader must skim through not so short, and imperative code just to get the test story
+### :thumbsdown: ตัวอย่างที่ควรหลีกเลี่ยง: เขียน test ที่มีการใช้ลอจิกและเงื่อนไขมากขึ้นเพื่อจะสร้างเรื่องราวที่อาจต้องการเทสหลายเคส ซึ่งทำให้ผู้อ่านต้องทำความเข้าใจมากกว่าปกติ
 
 ```javascript
 test("When asking for an admin, ensure only ordered admins in results", () => {
@@ -240,7 +239,7 @@ test("When asking for an admin, ensure only ordered admins in results", () => {
 
 <br/>
 
-### :clap: Doing It Right Example: Skimming through the following declarative test is a breeze
+### :clap: ตัวอย่างที่ดี: การเขียนแบบประกาศ ทำให้เข้าใจได้อย่างง่ายดาย เพียงแค่อ่านผ่านๆ
 
 ```javascript
 it("When asking for an admin, ensure only ordered admins in results", () => {
@@ -257,31 +256,35 @@ it("When asking for an admin, ensure only ordered admins in results", () => {
 
 <br/><br/>
 
-## ⚪ ️ 1.4 Stick to black-box testing: Test only public methods
+## ⚪ ️ 1.4 เน้นการทดสอบแบบ black-box testing: ทดสอบเฉพาะส่วนที่เป็นสาธารณะเท่านั้น
 
-:white_check_mark: **Do:** Testing the internals brings huge overhead for almost nothing. If your code/API delivers the right results, should you really invest your next 3 hours in testing HOW it worked internally and then maintain these fragile tests? Whenever a public behavior is checked, the private implementation is also implicitly tested and your tests will break only if there is a certain problem (e.g. wrong output). This approach is also referred to as `behavioral testing`. On the other side, should you test the internals (white box approach) — your focus shifts from planning the component outcome to nitty-gritty details and your test might break because of minor code refactors although the results are fine - this dramatically increases the maintenance burden
+:white_check_mark: **ควรทำ:** การทดสอบโค้ดที่เป็น internal โดยที่ต้องมีการทำความเข้าใจโค้ดภายใน นั้นเป็นการสิ้นเปลืองโดยใช่เหตุ
+ตัวอย่างเช่น ถ้าการเรียก api และได้รับผลกลับมาที่ถูกต้อง ก็ไม่จำเป็นที่จะต้องเสียเวลา 3 ชั่วโมง เพื่อเขียน test ว่าภายในนั้นทำงานอย่างไร
+ก็คือ การทดสอบแบบ Black-box จะถือว่าโค้ดที่เป็นภายในได้ถูกตรวจสอบไปด้วยแล้ว และการทดสอบจะพังแค่ในบางกรณีเท่านั้น (เช่น ผลลัพธ์ไม่ถูกต้อง)
+วิธีการนี้ เรียกว่า การทดสอบเฉพาะพฤติกรรม `behavioral testing`
+ในทางกลับกัน กับกรณีการทดสอบโค้ดแบบ white-box testing จะเปลี่ยนการโฟกัส จากผลลัพธ์ที่ได้ เป็นทดสอบถึงรายละเอียดอื่นๆ ที่สำคัญที่สามารถทำให้เบรกการทดสอบได้แม้ว่าผลลัพธ์จะถูกต้องก็ตาม เช่น มีการปรับโครงสร้างโค้ด ซึ่งจะทำให้เกิดภาระในการบำรุงรักษาอย่างมาก
 <br/>
 
-❌ **Otherwise:** Your tests behave like the [boy who cried wolf](https://en.wikipedia.org/wiki/The_Boy_Who_Cried_Wolf): shouting false-positive cries (e.g., A test fails because a private variable name was changed). Unsurprisingly, people will soon start to ignore the CI notifications until someday, a real bug gets ignored…
+❌ **ถ้าไม่ทำล่ะ:** test จะเป็นเหมือนเด็กเลี้ยงแกะ [boy who cried wolf](https://en.wikipedia.org/wiki/The_Boy_Who_Cried_Wolf) ก็คือ การคร่ำครวญแบบไม่จริง (ตัวอย่างเช่น test ไม่ผ่าน เพราะมีการเปลี่ยนชื่อตัวแปรภายใน) จะไม่แปลกใจเลย ที่สุดท้ายก็จะเริ่มมีการละเลยการแจ้งเตือนจาก CI ที่ทำให้บั้กตัวจริงก็จะถูกละเลยด้วยไปพร้อมกัน
 
 <br/>
-<details><summary>✏ <b>Code Examples</b></summary>
+<details><summary>✏ <b>ตัวอย่างโค้ด</b></summary>
 
 <br/>
 
-### :thumbsdown: Anti-Pattern Example: A test case is testing the internals for no good reason
+### :thumbsdown: ตัวอย่างที่ควรหลีกเลี่ยง: การเขียน test เพื่อทดสอบการทำงานภายในแบบไม่มีเหตุผลที่ดีพอ
 
 ![](https://img.shields.io/badge/🔧%20Example%20using%20Mocha-blue.svg "Examples with Mocha & Chai")
 
 ```javascript
 class ProductService {
-  //this method is only used internally
-  //Change this name will make the tests fail
+  //ฟังก์ชันนี้ใช้ภายในเท่านั้น
+  //เปลี่ยนชื่อฟังก์ชั่นนี้จะทำให้ test ไม่ผ่าน
   calculateVATAdd(priceWithoutVAT) {
     return { finalPrice: priceWithoutVAT * 1.2 };
-    //Change the result format or key name above will make the tests fail
+    //เปลี่ยนรูปแบบผลลัพธ์หรือชื่อ key ด้านบนนี้จะทำให้ test ไม่ผ่าน
   }
-  //public method
+  //ฟังก์ชั่นสาธารณะ
   getPrice(productId) {
     const desiredProduct = DB.getProduct(productId);
     finalPrice = this.calculateVATAdd(desiredProduct.price).finalPrice;
@@ -290,7 +293,7 @@ class ProductService {
 }
 
 it("White-box test: When the internal methods get 0 vat, it return 0 response", async () => {
-  //There's no requirement to allow users to calculate the VAT, only show the final price. Nevertheless we falsely insist here to test the class internals
+  //ไม่มี requirement ที่อนุญาตให้ผู้ใช้คำนวณ VAT, โดยจะแสดงราคาสุดท้ายเท่านั้น อย่างไรก็ตามเราแค่อยากจะทดสอบการทำงานฟังก์ชั่นภายใน class ดู
   expect(new ProductService().calculateVATAdd(0).finalPrice).to.equal(0);
 });
 ```
