@@ -302,32 +302,32 @@ it("White-box test: When the internal methods get 0 vat, it return 0 response", 
 
 <br/><br/>
 
-## ⚪ ️ ️1.5 Choose the right test doubles: Avoid mocks in favor of stubs and spies
+## ⚪ ️ ️1.5 เลือก test doubles ที่เหมาะสม: หลีกเลี่ยงการจำลองข้อมูลประเภท stubs และ spies จนบ่อยเกินไป
 
-:white_check_mark: **Do:** Test doubles are a necessary evil because they are coupled to the application internals, yet some provide immense value (<a href="https://martinfowler.com/articles/mocksArentStubs.html" data-href="https://martinfowler.com/articles/mocksArentStubs.html" class="markup--anchor markup--p-anchor" rel="noopener nofollow" target="_blank">[Read here a reminder about test doubles: mocks vs stubs vs spies](https://martinfowler.com/articles/mocksArentStubs.html)</a>).
+:white_check_mark: **ควรทำ:** การทำ test doubles เป็นสิ่งที่จำเป็นอาจจะน่ากลัวแต่หลีกเลี่ยงไม่ได้ เพราะว่ามันยึึดติดกับสิ่งที่อยู่ภายในแอพลิเคชั่น หรือบางส่วนที่มีคุณค่าในการทดสอบ (<a href="https://martinfowler.com/articles/mocksArentStubs.html" data-href="https://martinfowler.com/articles/mocksArentStubs.html" class="markup--anchor markup--p-anchor" rel="noopener nofollow" target="_blank">[อ่านเพิ่มเติมเกี่ยวกับ test doubles: mocks vs stubs vs spies](https://martinfowler.com/articles/mocksArentStubs.html)</a>).
 
-Before using test doubles, ask a very simple question: Do I use it to test functionality that appears, or could appear, in the requirements document? If no, it’s a white-box testing smell.
+แต่ก่อนที่จะทำการ test doubles ต้องถามตัวเองง่ายๆ ก่อนว่า: ฟังก์ชันที่ฉันจะทดสอบการทำงานของนี้มีอยู่ในเอกสารความต้องการหรือไม่ ถ้าไม่, มันจะกลายเป็นการทดสอบแบบ white-box ไป
 
-For example, if you want to test that your app behaves reasonably when the payment service is down, you might stub the payment service and trigger some ‘No Response’ return to ensure that the unit under test returns the right value. This checks our application behavior/response/outcome under certain scenarios. You might also use a spy to assert that an email was sent when that service is down — this is again a behavioral check which is likely to appear in a requirements doc (“Send an email if payment couldn’t be saved”). On the flip side, if you mock the Payment service and ensure that it was called with the right JavaScript types — then your test is focused on internal things that got nothing with the application functionality and are likely to change frequently
+ตัวอย่างเช่น หากคุณต้องการทดสอบว่าแอพของคุณยังมีการทำงานได้อย่างถูกต้องในขณะที่เซอร์วิสการชำระเงินหยุดทำงาน คุณอาจจะต้อง stub ในการเรียกเซอร์วิสการชำระเงิน และคืนค่า ‘ไม่ตอบสนอง’ เพื่อยืนยันว่าหน่วยการทดสอบได้คืนค่าแล้วอย่างถูกต้อง ซึ่งเป็นการตรวจสอบ พฤติกรรม/การตอบสนอง/ผลลัพธ์ ของแอพลิเคชั่นในสถานการณ์บางอย่าง นอกจากนี้ เพิ่มเติม คุณอาจจะใช้ spy ในการยืนยันว่าอีเมลได้่ถูกส่งแล้วเมื่อบริการนั้นหยุดทำงาน ซึ่งจะเป็นการตรวจสอบพฤติกรรมที่อาจจะมีอยู่ในเอกสารความต้องการ (“ส่งอีเมลถ้าไม่สามารถบันทึกการชำระเงินได้”) ในทางกลับกัน หากคุณจำลอง (mock) เซอร์วิสการชำระเงิน และตรวจสอบว่ามีการเรียกใช้ประเภทของ JavaScript อย่างถูกต้อง ซึ่งจะเป็นการโฟกัสไปที่การทำงานภายใน ที่อาจไม่มีประโยชน์เนื่องจากอาจจะมีการเปลี่ยนแปลงได้่อยู่เสมอ
 <br/>
 
-❌ **Otherwise:** Any refactoring of code mandates searching for all the mocks in the code and updating accordingly. Tests become a burden rather than a helpful friend
-
-<br/>
-
-<details><summary>✏ <b>Code Examples</b></summary>
+❌ **ถ้าไม่ทำล่ะ:** ทุกครั้งในการ refactor จะต้องไปทำการค้นหาและอัพเดท mock ทั้งหมดที่เกี่ยวกัน การทดสอบทั้งหมดจะกลายเป็นภาระมากกว่าประโยชน์
 
 <br/>
 
-### :thumbsdown: Anti-pattern example: Mocks focus on the internals
+<details><summary>✏ <b>ตัวอย่างโค้ด</b></summary>
+
+<br/>
+
+### :thumbsdown: ตัวอย่างที่ควรหลีกเลี่ยง: การ mock ที่โฟกัสแต่ฟังก์ชันภายใน
 
 ![](https://img.shields.io/badge/🔧%20Example%20using%20Sinon-blue.svg "Examples with Sinon")
 
 ```javascript
 it("When a valid product is about to be deleted, ensure data access DAL was called once, with the right product and right config", async () => {
-  //Assume we already added a product
+  //สมมติว่าเราเพิ่มข้อมูลไปแล้ว
   const dataAccessMock = sinon.mock(DAL);
-  //hmmm BAD: testing the internals is actually our main goal here, not just a side-effect
+  //หืมมม แบบนี้ไม่ดี: ตรงนี้การทดสอบฟังก์ชันภายในคือเป้าหมายหลัก ไม่ใช่แค่ทดสอบผลข้างเคียงที่จะเกิด
   dataAccessMock
     .expects("deleteProduct")
     .once()
@@ -339,14 +339,14 @@ it("When a valid product is about to be deleted, ensure data access DAL was call
 
 <br/>
 
-### :clap:Doing It Right Example: spies are focused on testing the requirements but as a side-effect are unavoidably touching to the internals
+### :clap: ตัวอย่างที่ดี: spies are focused on testing the requirements but as a side-effect are unavoidably touching to the internals แฝงการทดสอบ (spy) ที่โฟกัสการทดสอบตามความต้องการ เนื่องจากมีผลข้างเคียงที่จะเกิดจากฟังก์ชันภายใน ที่ไม่สามารถหลีกเลี่ยงได้
 
 ```javascript
 it("When a valid product is about to be deleted, ensure an email is sent", async () => {
-  //Assume we already added here a product
+  //สมมติว่าเราเพิ่มข้อมูลไปแล้ว
   const spy = sinon.spy(Emailer.prototype, "sendEmail");
   new ProductService().deletePrice(theProductWeJustAdded);
-  //hmmm OK: we deal with internals? Yes, but as a side effect of testing the requirements (sending an email)
+  //อืมมม OK: เรากำลังเผชิญกับฟังก์ชันภายในหรอ? ใช่ ทดสอบว่าได้มีการเรียกฟังก์ชันส่งอีเมลที่เป็นผลข้างเคียงตามความต้องการ
   expect(spy.calledOnce).to.be.true;
 });
 ```
@@ -355,9 +355,9 @@ it("When a valid product is about to be deleted, ensure an email is sent", async
 
 <br/><br/>
 
-## 📗 Want to learn all these practices with live video?
+## 📗 วิดีโอสำหรับเรียนเพิ่มเติมเกี่ยวกับตัวอย่างที่ดี
 
-### Visit my online course [Testing Node.js & JavaScript From A To Z](https://www.testjavascript.com)
+### เข้าดูคอร์สออนไลน์ของฉัน [Testing Node.js & JavaScript From A To Z](https://www.testjavascript.com)
 
 <br/><br/>
 
